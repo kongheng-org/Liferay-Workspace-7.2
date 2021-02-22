@@ -72,6 +72,10 @@ public interface GuestbookLocalService
 	@Indexable(type = IndexableType.REINDEX)
 	public Guestbook addGuestbook(Guestbook guestbook);
 
+	public Guestbook addGuestbook(
+			long userId, String name, ServiceContext serviceContext)
+		throws PortalException;
+
 	/**
 	 * Creates a new guestbook with the primary key. Does not add the guestbook to the database.
 	 *
@@ -229,6 +233,16 @@ public interface GuestbookLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<Guestbook> getGuestbooks(int start, int end);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Guestbook> getGuestbooks(long groupId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Guestbook> getGuestbooks(long groupId, int start, int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Guestbook> getGuestbooks(
+		long groupId, int start, int end, OrderByComparator<Guestbook> obc);
+
 	/**
 	 * Returns all the guestbooks matching the UUID and company.
 	 *
@@ -262,6 +276,9 @@ public interface GuestbookLocalService
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getGuestbooksCount();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getGuestbooksCount(long groupId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();
