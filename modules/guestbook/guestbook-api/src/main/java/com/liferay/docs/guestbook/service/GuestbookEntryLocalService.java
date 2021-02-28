@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.service.BaseLocalService;
 import com.liferay.portal.kernel.service.PersistedModelLocalService;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
@@ -91,11 +92,10 @@ public interface GuestbookEntryLocalService
 	 *
 	 * @param guestbookEntry the guestbook entry
 	 * @return the guestbook entry that was removed
+	 * @throws PortalException
 	 */
 	@Indexable(type = IndexableType.DELETE)
-	public GuestbookEntry deleteGuestbookEntry(GuestbookEntry guestbookEntry);
-
-	public GuestbookEntry deleteGuestbookEntry(GuestbookEntry entry)
+	public GuestbookEntry deleteGuestbookEntry(GuestbookEntry guestbookEntry)
 		throws PortalException;
 
 	/**
@@ -106,9 +106,6 @@ public interface GuestbookEntryLocalService
 	 * @throws PortalException if a guestbook entry with the primary key could not be found
 	 */
 	@Indexable(type = IndexableType.DELETE)
-	public GuestbookEntry deleteGuestbookEntry(long entryId)
-		throws PortalException;
-
 	public GuestbookEntry deleteGuestbookEntry(long entryId)
 		throws PortalException;
 
@@ -278,10 +275,6 @@ public interface GuestbookEntryLocalService
 	 * @return the guestbook entry
 	 * @throws PortalException if a guestbook entry with the primary key could not be found
 	 */
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public GuestbookEntry getGuestbookEntry(long entryId)
-		throws PortalException;
-
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public GuestbookEntry getGuestbookEntry(long entryId)
 		throws PortalException;

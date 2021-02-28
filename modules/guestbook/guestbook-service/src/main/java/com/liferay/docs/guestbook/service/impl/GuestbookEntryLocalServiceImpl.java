@@ -1,9 +1,22 @@
 package com.liferay.docs.guestbook.service.impl;
 
+import com.liferay.docs.guestbook.exception.GuestbookEntryEmailException;
+import com.liferay.docs.guestbook.exception.GuestbookEntryMessageException;
+import com.liferay.docs.guestbook.exception.GuestbookEntryNameException;
+import com.liferay.docs.guestbook.model.GuestbookEntry;
 import com.liferay.docs.guestbook.service.base.GuestbookEntryLocalServiceBaseImpl;
 import com.liferay.portal.aop.AopService;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.Validator;
 import org.osgi.service.component.annotations.Component;
+
+import java.util.Date;
+import java.util.List;
 
 @Component(
 	property = "model.class.name=com.liferay.docs.guestbook.model.GuestbookEntry",

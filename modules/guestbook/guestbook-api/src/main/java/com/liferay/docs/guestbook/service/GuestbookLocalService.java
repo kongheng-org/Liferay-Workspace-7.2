@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.service.BaseLocalService;
 import com.liferay.portal.kernel.service.PersistedModelLocalService;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
@@ -103,6 +104,10 @@ public interface GuestbookLocalService
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	public Guestbook deleteGuestbook(long guestbookId) throws PortalException;
+
+	public Guestbook deleteGuestbook(
+			long guestbookId, ServiceContext serviceContext)
+		throws PortalException, SystemException;
 
 	/**
 	 * @throws PortalException
@@ -306,5 +311,10 @@ public interface GuestbookLocalService
 	 */
 	@Indexable(type = IndexableType.REINDEX)
 	public Guestbook updateGuestbook(Guestbook guestbook);
+
+	public Guestbook updateGuestbook(
+			long userId, long guestbookId, String name,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException;
 
 }
