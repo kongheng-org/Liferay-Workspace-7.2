@@ -1,0 +1,16 @@
+dependencies {
+    compileOnly "${com_liferay_petra_io}"
+    compileOnly "${com_liferay_petra_lang}"
+    compileOnly "${com_liferay_petra_string}"
+    compileOnly "${com_liferay_portal_aop_api}"
+    compileOnly "${com_liferay_portal_kernel}"
+    compileOnly "${org_osgi_annotation_versioning}"
+    compileOnly "${org_osgi_core}"
+    compileOnly "${org_osgi_service_component_annotations}"
+    compileOnly "${com_liferay_util_taglib}"
+    compileOnly "${portlet_api}"
+    compileOnly "${javax_servlet_api}"
+    compileOnly "${jstl}"
+    compileOnly "${osgi_cmpn}"
+    compileOnly "${com_liferay_application_list_api}"
+}

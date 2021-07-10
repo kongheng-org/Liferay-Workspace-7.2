@@ -1,0 +1,15 @@
+apply from: "${rootDir}/dependencies/liferay-minimal.gradle"
+
+dependencies {
+	compileOnly project(":modules:guestbook:guestbook-api")
+}
+
+buildService {
+	apiDir = "../guestbook-api/src/main/java"
+	osgiModule = true
+	databaseNameMaxLength = 100
+	buildNumberIncrement = false
+	propsUtil = "com.khalibre.crm.service.util.PropsUtil"
+}
+
+group = "com.liferay.docs.guestbook"
