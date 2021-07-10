@@ -1,15 +1,5 @@
 package com.liferay.docs.guestbook.portlet;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import javax.portlet.ActionRequest;
-import javax.portlet.ActionResponse;
-import javax.portlet.Portlet;
-
-import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
-
 import com.liferay.docs.guestbook.constants.GuestbookPortletKeys;
 import com.liferay.docs.guestbook.model.Guestbook;
 import com.liferay.docs.guestbook.service.GuestbookLocalService;
@@ -17,7 +7,16 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
+import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ParamUtil;
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
+
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
+import javax.portlet.Portlet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 @Component(
         immediate = true,
         property = {
@@ -54,10 +53,20 @@ public void addGuestbook(ActionRequest request, ActionResponse response)
 
             Logger.getLogger(GuestbookAdminPortlet.class.getName()).log(
                 Level.SEVERE, null, pe);
+            errorMessage(request, pe);
 
             response.setRenderParameter(
                 "mvcPath", "/guestbook_admin/edit_guestbook.jsp");
         }
+    successMessage(request, "guestbookAdded");
+}
+
+    private void successMessage(ActionRequest request, String guestbookAdded) {
+        SessionMessages.add(request, guestbookAdded);
+    }
+
+    private void errorMessage(ActionRequest request, PortalException pe) {
+        SessionMessages.get(request, pe.getClass().getName());
     }
 
     public void updateGuestbook(ActionRequest request, ActionResponse response)
@@ -74,15 +83,17 @@ public void addGuestbook(ActionRequest request, ActionResponse response)
                 serviceContext.getUserId(), guestbookId, name, serviceContext);
 
         } catch (PortalException pe) {
-        
+
             Logger.getLogger(GuestbookAdminPortlet.class.getName()).log(
                 Level.SEVERE, null, pe);
+            errorMessage(request, pe);
 
             response.setRenderParameter(
                 "mvcPath", "/guestbook_admin/edit_guestbook.jsp");
         }
+        successMessage(request, "guestbookUpdated");
     }
-    
+
     public void deleteGuestbook(ActionRequest request, ActionResponse response)
         throws PortalException {
 
@@ -98,7 +109,9 @@ public void addGuestbook(ActionRequest request, ActionResponse response)
 
             Logger.getLogger(GuestbookAdminPortlet.class.getName()).log(
                 Level.SEVERE, null, pe);
+            errorMessage(request, pe);
         }
+        successMessage(request, "guestbookDeleted");
     }
 
 	@Reference
