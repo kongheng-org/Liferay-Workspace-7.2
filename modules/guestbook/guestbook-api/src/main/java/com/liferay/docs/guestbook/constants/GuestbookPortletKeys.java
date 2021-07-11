@@ -5,7 +5,7 @@ package com.liferay.docs.guestbook.constants;
  */
 public class GuestbookPortletKeys {
 
-	public static final String Guestbook = "guestbook";
+	public static final String GUESTBOOK = "guestbook";
 	public static final String GUESTBOOK_ADMIN = "GuestbookAdmin";
 
 }
