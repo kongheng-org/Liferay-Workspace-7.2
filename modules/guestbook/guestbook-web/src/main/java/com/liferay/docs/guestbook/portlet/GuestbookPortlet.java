@@ -28,7 +28,7 @@ import java.util.logging.Logger;
 		"com.liferay.portlet.instanceable=false",
 		"javax.portlet.init-param.template-path=/",
 		"javax.portlet.init-param.view-template=/guestbook/view.jsp",
-		"javax.portlet.name=" + GuestbookPortletKeys.Guestbook,
+		"javax.portlet.name=" + GuestbookPortletKeys.GUESTBOOK,
 		"javax.portlet.resource-bundle=content.Language",
 		"javax.portlet.security-role-ref=power-user,user",
 		"com.liferay.portlet.header-portlet-css=/css/main.css",

@@ -9,6 +9,7 @@ import com.liferay.portal.aop.AopService;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.model.ResourceConstants;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -52,6 +53,17 @@ public class GuestbookLocalServiceImpl extends GuestbookLocalServiceBaseImpl {
 
 		guestbookPersistence.update(guestbook);
 
+		resourceLocalService.addResources(
+				user.getCompanyId(),
+				groupId,
+				userId,
+				Guestbook.class.getName(),
+				guestbookId,
+				false,
+				true,
+				true
+		);
+
 		return guestbook;
 	}
 
@@ -75,6 +87,14 @@ public class GuestbookLocalServiceImpl extends GuestbookLocalServiceBaseImpl {
 
 		guestbookPersistence.update(guestbook);
 
+		resourceLocalService.updateResources(
+				serviceContext.getCompanyId(),
+				serviceContext.getScopeGroupId(),
+				Guestbook.class.getName(),
+				guestbookId,
+				serviceContext.getModelPermissions()
+		);
+
 		return guestbook;
 	}
 
@@ -92,6 +112,13 @@ public class GuestbookLocalServiceImpl extends GuestbookLocalServiceBaseImpl {
 		}
 
 		guestbook = deleteGuestbook(guestbook);
+
+		resourceLocalService.deleteResource(
+				serviceContext.getCompanyId(),
+				Guestbook.class.getName(),
+				ResourceConstants.SCOPE_INDIVIDUAL,
+				guestbookId
+		);
 
 		return guestbook;
 	}
