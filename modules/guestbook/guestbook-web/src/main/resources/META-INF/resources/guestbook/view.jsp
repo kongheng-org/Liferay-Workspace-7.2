@@ -101,3 +101,5 @@ long guestbookId = Long.valueOf((Long) renderRequest
 <liferay-ui:search-iterator />
 
 </liferay-ui:search-container>
+
+<h1>test</h1>
